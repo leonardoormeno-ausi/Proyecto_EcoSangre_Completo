@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>EcoSangreAPI</name>
+    </assembly>
+    <members>
+        <member name="T:EcoSangreAPI.Controllers.BloodRequestsController">
+            <summary>
+            Controlador para la gestión de solicitudes y alertas comunitarias de donación de sangre.
+            </summary>
+        </member>
+        <member name="M:EcoSangreAPI.Controllers.BloodRequestsController.CreateRequest(EcoSangreAPI.Models.BloodRequest)">
+            <summary>
+            Crear una nueva solicitud urgente de donación de sangre en la comunidad.
+            </summary>
+            <param name="request">Datos de la solicitud (paciente, tipo de sangre, hospital, etc.).</param>
+            <returns>La solicitud creada con su ID asignado.</returns>
+        </member>
+        <member name="M:EcoSangreAPI.Controllers.BloodRequestsController.GetActiveRequests(System.Nullable{EcoSangreAPI.Models.BloodType},System.String)">
+            <summary>
+            Listar todos los pedidos de donación que se encuentran activos. Permite filtrar los resultados.
+            </summary>
+            <param name="bloodType">Filtro opcional por grupo y factor sanguíneo.</param>
+            <param name="city">Filtro opcional por nombre de la localidad o ciudad.</param>
+            <returns>Lista de alertas de donación activas que coinciden con la búsqueda.</returns>
+        </member>
+        <member name="M:EcoSangreAPI.Controllers.BloodRequestsController.GetRequestById(System.Int32)">
+            <summary>
+            Obtener el detalle específico de un pedido de donación de sangre mediante su identificador único (ID).
+            </summary>
+            <param name="id">ID de la solicitud a consultar.</param>
+            <returns>Los datos detallados de la solicitud pedida.</returns>
+        </member>
+        <member name="M:EcoSangreAPI.Controllers.BloodRequestsController.JoinAsDonor(System.Int32)">
+            <summary>
+            Postularse como donante voluntario para un pedido específico. Incrementa el contador de dadores en tiempo real.
+            </summary>
+            <remarks>
+            Lógica de negocio: Si al sumarse el donante se alcanza el cupo total requerido, la alerta cambia de estado automáticamente a Inactiva.
+            </remarks>
+            <param name="id">ID del pedido de donación al que te quieres postular.</param>
+            <returns>Mensaje de éxito y el contador actualizado de dadores confirmados.</returns>
+        </member>
+        <member name="M:EcoSangreAPI.Controllers.BloodRequestsController.CloseRequest(System.Int32)">
+            <summary>
+            Dar de baja o dar por finalizado un pedido de donación de forma manual.
+            </summary>
+            <remarks>
+            Aplica un "borrado lógico" (soft-delete), desactivando la alerta de la vista pública pero conservando los datos para el historial estadístico.
+            </remarks>
+            <param name="id">ID del pedido que se desea cerrar o retirar.</param>
+        </member>
+        <member name="T:EcoSangreAPI.Migrations.InitialCreate">
+            <inheritdoc />
+        </member>
+        <member name="M:EcoSangreAPI.Migrations.InitialCreate.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:EcoSangreAPI.Migrations.InitialCreate.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:EcoSangreAPI.Migrations.InitialCreate.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>
